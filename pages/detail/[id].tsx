@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import About from "../../components/About";
 import BaseStat from "../../components/BaseState";
+import Moves from "../../components/Moves";
+import Nature from "../../components/Nature";
 
 export default function Home() {
   const router = useRouter();
@@ -33,6 +35,9 @@ export default function Home() {
       <div className="w-[300px] h-[300px] pointer-events-none absolute bottom-1/2 translate-y-[25%] right-1/2 translate-x-1/2 z-20">
         <Image alt="pokemon-img" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} fill />
       </div>
+      <div className="w-[300px] h-[300px] pointer-events-none opacity-[0.6] absolute bottom-1/2 right-0 translate-x-[50px] translate-y-[50px] z-10">
+        <Image alt="icobg" src="/pokeball.png" fill sizes="1" />
+      </div>
       <div className="bg-white basis-1/2 rounded-t-3xl -mt-5 overflow-hidden p-3 flex flex-col gap-3">
         <div className="flex mt-4 mx-auto">
           <div
@@ -47,6 +52,16 @@ export default function Home() {
           </div>
           <div
             onClick={() => {
+              setMenuActive("nature");
+            }}
+            className={`"flex items-center justify-center p-3 border-b ${
+              menuActive == "nature" ? "border-red-500" : "border-b-white"
+            }  hover:border-b-green-500`}
+          >
+            <p className={`text-base font-bold ${menuActive == "nature" ? "text-gray-900" : "text-gray-500"}`}>Nature</p>
+          </div>
+          <div
+            onClick={() => {
               setMenuActive("base");
             }}
             className={`"flex items-center justify-center p-3 border-b ${
@@ -54,16 +69,6 @@ export default function Home() {
             }  hover:border-b-green-500`}
           >
             <p className={`text-base font-bold ${menuActive == "base" ? "text-gray-900" : "text-gray-500"}`}>Base Stat</p>
-          </div>
-          <div
-            onClick={() => {
-              setMenuActive("evolution");
-            }}
-            className={`"flex items-center justify-center p-3 border-b ${
-              menuActive == "evolution" ? "border-red-500" : "border-b-white"
-            }  hover:border-b-green-500`}
-          >
-            <p className={`text-base font-bold ${menuActive == "evolution" ? "text-gray-900" : "text-gray-500"}`}>Evolution</p>
           </div>
           <div
             onClick={() => {
@@ -76,7 +81,15 @@ export default function Home() {
             <p className={`text-base font-bold ${menuActive == "moves" ? "text-gray-900" : "text-gray-500"}`}>Moves</p>
           </div>
         </div>
-        {menuActive == "about" ? <About /> : menuActive == "base" ? <BaseStat /> : null}
+        {menuActive == "about" ? (
+          <About id={id as string} />
+        ) : menuActive == "nature" ? (
+          <Nature id={id as string} />
+        ) : menuActive == "base" ? (
+          <BaseStat id={id as string} />
+        ) : menuActive == "moves" ? (
+          <Moves id={id as string} />
+        ) : null}
       </div>
     </div>
   );

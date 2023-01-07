@@ -42,6 +42,9 @@ export default function Home() {
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:max-w-[1200px] lg:m-auto gap-3 p-3">
+      <div className="col-span-full my-4">
+        <p className="text-4xl font-extrabold">Pokedex</p>
+      </div>
       {pokemonNameList.map((pokemon, index) => (
         <div
           key={index}
