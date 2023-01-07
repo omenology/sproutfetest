@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import About from "../../components/About";
+import BaseStat from "../../components/BaseState";
 
 export default function Home() {
   const router = useRouter();
@@ -75,7 +76,7 @@ export default function Home() {
             <p className={`text-base font-bold ${menuActive == "moves" ? "text-gray-900" : "text-gray-500"}`}>Moves</p>
           </div>
         </div>
-        <About />
+        {menuActive == "about" ? <About /> : menuActive == "base" ? <BaseStat /> : null}
       </div>
     </div>
   );
